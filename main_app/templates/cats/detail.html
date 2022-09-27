@@ -7,15 +7,26 @@
 
 <div class="card">
     <div class="card-content">
+        <div class="flex-container">
+            <div>
         <span class="card-title"> {{ cat.name }}</span>
         <p>Breed: {{ cat.breed }}</p>
         <p>Description: {{ cat.description }}</p>
+
         {% if cat.age > 0 %}
             <p>Age: {{cat.age}} </p>
         {% else %}
             <p>Age: Kitten</p>
         {% endif %}
     </div>
+
+    {{cat.image}}
+    <div class="right">
+        {% load static %}
+        <img width="150px" height="150px" src={% static cat.image|cut:'main_app/static/' %} />
+    </div>
+    </div>
+</div>
 </div>
 
 {% endblock%}

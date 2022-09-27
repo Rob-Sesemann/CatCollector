@@ -6,8 +6,8 @@
 {% for cat in cats %}
 
 <div class="card">
-
-    <a href="/cats/{{ cat.id }}">
+<!-- We can provide a space for different parameters after 'detail' in line 10 -->
+<a href="{% url 'detail' cat.id %}">
     <div class="card-content">
 
         <div class="flex-container">
