@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+<!-- Overriding block of code with the name content -->
+{% block content %}
+
+<h1> Cat List </h1>
+
+<!-- We don't know how many will be in the list so we must use for each. we must also perform an endfor code as we would for endblock -->
+{% for cat in cats %}
+
+<div class="card">
+    <div class="card-content">
+
+        <!-- If we didn't want to display then we only need a single curly bracket but in this case we would like to display so we must use double curly brackets -->
+        <span class="card-title"> {{ cat.name }} </span>
+        <p> Breed: {{ cat.breed }} </p>
+        <p> Description: {{ cat.description }} </p>
+
+        {% if cat.age > 0 %}
+            <p>Age: {{ cat.age }}</p>
+        {% else %} 
+            <p>Age: Kitten</p>
+        {% endif %}
+    </div>
+</div>
+
+
+
+
+{% endfor %}
+{% endblock %}
