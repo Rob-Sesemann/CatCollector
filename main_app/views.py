@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Cat
 # Importing parent class
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 # Create your views here.
 
@@ -26,6 +26,14 @@ class CatCreate(CreateView):
     # fields = '__all__' # fields line will use all the fields mentioned in models.py file - if we wanted some of the fields then we can write it as a list
 # fields = ['name', 'age'] - this will restrict what the end user can create.
     # success_url = '/cats/'
+
+class CatUpdate(UpdateView):
+    model = Cat
+    fields =['breed', 'description', 'age']
+
+class CatDelete(DeleteView):
+    model = Cat
+    success_url = '/cats/'
 
 
 def home(request):
