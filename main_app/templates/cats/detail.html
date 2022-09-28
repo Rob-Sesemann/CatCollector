@@ -25,7 +25,26 @@
         <a href="{% url 'cats_delete' cat.id %}">Delete</a>
     </div>
 
+<div>
+    <table class="striped">
+        <thead>
+            <tr>
+                <th> Date </th>
+                <th> Meal </th>
+            </tr>
+        </thead>
 
+        <tbody>
+            <!-- We need a for loop as we don't know how many meals and dates there will be -->
+            {% for feeding in cat.feeding_set.all %}
+            <tr>
+                <td>{{ feeding.date }}</td>
+                <td>{{ feeding.get_meal_display }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
     <div class="right">
         {% load static %}
         <img width="150px" height="150px" src={% static cat.image|cut:'main_app/static/' %} />
