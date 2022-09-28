@@ -22,7 +22,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 # Defining Classes
 class CatCreate(CreateView):
     model = Cat
-    fields = ['name', 'breed', 'description', 'age']
+    fields = ['name', 'breed', 'description', 'age', 'image']
     # fields = '__all__' # fields line will use all the fields mentioned in models.py file - if we wanted some of the fields then we can write it as a list
 # fields = ['name', 'age'] - this will restrict what the end user can create.
     # success_url = '/cats/'

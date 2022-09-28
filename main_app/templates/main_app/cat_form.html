@@ -2,9 +2,13 @@
 
 {% block content %}
 
-<form action="" method="post">
+{% if object %}
+    <h1>Edit <span class="teal-text">{{ object.name }}</span></h1>
+{% else %}
+    <h1> Add Cat </h1>
+{% endif %}
 
-
+<form action="" method="post" enctype="multipart/form-data">
     {% csrf_token %}
 <!-- I can remove the as_table so that it doesn't become written as a table. -->
     <table>
