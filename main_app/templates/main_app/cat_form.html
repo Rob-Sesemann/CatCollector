@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="" method="post">
+
+
+    {% csrf_token %}
+<!-- I can remove the as_table so that it doesn't become written as a table. -->
+    <table>
+    {{ form.as_table }}
+    </table>
+
+    <input type="submit" value="submit" class="btn">
+
+</form>
+
+
+
+{% endblock %}
