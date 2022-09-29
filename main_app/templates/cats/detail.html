@@ -1,31 +1,38 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
-    
-<h1> Cat Details </h1>
+
+<h1> Cat Details</h1>
 
 <div class="card">
     <div class="card-content">
-        <div class="flex-container">
-            <div>
-        <span class="card-title"> {{ cat.name }}</span>
+        <span class="card-title">{{ cat.name }}</span>
         <p>Breed: {{ cat.breed }}</p>
         <p>Description: {{ cat.description }}</p>
 
         {% if cat.age > 0 %}
-            <p>Age: {{cat.age}} </p>
+        <p>Age: {{cat.age}} </p>
         {% else %}
             <p>Age: Kitten</p>
         {% endif %}
+
     </div>
 
     <div class="card-action">
         <a href="{% url 'cats_update' cat.id %}">Edit</a>
         <a href="{% url 'cats_delete' cat.id %}">Delete</a>
     </div>
+</div>
+
 
 <div>
+
+    <form method="post" action="{% url 'add_feeding' cat.id %}">
+        {% csrf_token %}
+        {{ feeding_form.as_p }}
+        <input type="submit" value="Add Feeding" class="btn">
+    </form>
+
     <table class="striped">
         <thead>
             <tr>
@@ -33,24 +40,30 @@
                 <th> Meal </th>
             </tr>
         </thead>
-
+ 
         <tbody>
-            <!-- We need a for loop as we don't know how many meals and dates there will be -->
             {% for feeding in cat.feeding_set.all %}
             <tr>
-                <td>{{ feeding.date }}</td>
-                <td>{{ feeding.get_meal_display }}</td>
+                <td> {{ feeding.date }} </td>
+                <td> {{ feeding.get_meal_display }} </td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
-    <div class="right">
-        {% load static %}
-        <img width="150px" height="150px" src={% static cat.image|cut:'main_app/static/' %} />
-    </div>
-    </div>
-</div>
-</div>
 
-{% endblock%}
+
+<script>
+   let dateEl = document.getElementById('id_date');
+   M.Datepicker.init(dateEl, {
+    format:'yyyy-mm-dd',
+    defaultDate: new Date(),
+    setDefaultDate: true,
+    autoClose: true
+   })
+
+   let selectEl = document.getElementById('id_meal')
+   M.FormSelect.init(selectEl);
+
+</script>
+{% endblock %}

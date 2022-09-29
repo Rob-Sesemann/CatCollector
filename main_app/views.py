@@ -1,9 +1,10 @@
 from sqlite3 import DatabaseError
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Cat
 # Importing parent class
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from .forms import FeedingForm
 
 # Create your views here.
 
@@ -50,8 +51,19 @@ def cats_index(request):
 def cats_detail(request, cat_id):
     # SELECT * FROM main_app_cat WHERE id = cat_id
     cat = Cat.objects.get(id = cat_id)
-    return render(request, 'cats/detail.html', {'cat': cat})
 
+    feeding_form = FeedingForm()
+    return render(request, 'cats/detail.html', {'cat': cat, 'feeding_form': feeding_form})
+
+def add_feeding(request, cat_id):
+    # req.body in Node.js
+    form = FeedingForm(request.POST)
+
+    if form.is_valid():
+        new_feeding = form.save(commit=False)
+        new_feeding.cat_id = cat_id
+        new_feeding.save()
+    return redirect('detail', cat_id = cat_id)
 # ListView - To display all the records from the database
 # DetailView - To display a single record from the Database
 # CreateView - Used to create instance of a model
