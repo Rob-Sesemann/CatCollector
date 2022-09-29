@@ -54,8 +54,11 @@ def cats_detail(request, cat_id):
     # SELECT * FROM main_app_cat WHERE id = cat_id
     cat = Cat.objects.get(id = cat_id)
 
+    # Exclude those toy ids which exist in cat_toys table with the current cat_id
+    toys_cat_doesnt_have = Toy.objects.exclude(id__in = cat.toys.all().values_list('id'))
+
     feeding_form = FeedingForm()
-    return render(request, 'cats/detail.html', {'cat': cat, 'feeding_form': feeding_form})
+    return render(request, 'cats/detail.html', {'cat': cat, 'feeding_form': feeding_form, 'toys': toys_cat_doesnt_have})
 
 def add_feeding(request, cat_id):
     # req.body in Node.js
