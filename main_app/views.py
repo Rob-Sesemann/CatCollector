@@ -1,9 +1,11 @@
 from sqlite3 import DatabaseError
+from tempfile import TemporaryFile
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Cat
+from .models import Cat, Toy
 # Importing parent class
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
 from .forms import FeedingForm
 
 # Create your views here.
@@ -76,3 +78,22 @@ def add_feeding(request, cat_id):
 
 # CUD - Create Update Delete
 
+# CBV's for Toy's CRUD Operations
+
+class ToyList(ListView):
+    model = Toy
+
+class ToyDetail(DetailView):
+    model = Toy
+
+class ToyCreate(CreateView):
+    model = Toy
+    fields = '__all__'
+
+class ToyUpdate(UpdateView):
+    model = Toy
+    fields = ['name', 'color']
+
+class ToyDelete(DeleteView):
+    model = Toy
+    success_url = '/toys/'
