@@ -28,5 +28,8 @@ urlpatterns = [
     path('cats/<int:cat_id>/assoc_toy/<int:toy_id>', views.assoc_toy, name='assoc_toy'),
 
     # Unassociate a toy from a cat (M:M)
-    path('cats/<int:cat_id>/unassoc_toy/<int:toy_id>', views.unassoc_toy, name='unassoc_toy')
+    path('cats/<int:cat_id>/unassoc_toy/<int:toy_id>', views.unassoc_toy, name='unassoc_toy'),
+
+    # SignUp
+    path('accounts/signup/', views.signup, name='signup')
 ]
