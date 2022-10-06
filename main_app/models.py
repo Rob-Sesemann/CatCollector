@@ -11,6 +11,13 @@ MEALS = (
     ('D', 'Dinner'),
 )
 
+VARIETIES = (
+    ('A', 'Arabica'),
+    ('R', 'Robusta'),
+    ('L', 'Liberica'),
+    ('E', 'Excelsa')
+)
+
 class Toy(models.Model):
     name = models.CharField(max_length=50)
     color = models.CharField(max_length=20)
